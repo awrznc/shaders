@@ -12,5 +12,23 @@
   <title>shaders</title>
 </head>
   <body>
+    <div id="canvas"></div>
   </body>
+  <script type="importmap">{ "imports": { "webgl": "./src/js/webgl.js" } }</script>
+  <script type="module">
+    import { WebGL } from 'webgl';
+    window.onload = ()=>{
+      const vertexShaderPath = 'src/glsl/vertex_shader.glsl';
+      const fragmentShaderPath = `src/glsl/${location.hash.slice(1)}/fragment_shader.glsl`;
+      let webgl = new WebGL( 500, 500, vertexShaderPath, fragmentShaderPath );
+      let canvas = document.getElementById('canvas');
+      canvas.append(webgl.canvas);
+    }
+  </script>
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+}
+  </style>
 </html>
